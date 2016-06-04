@@ -47,4 +47,11 @@ public @interface JSONField {
     SerializerFeature[] serialzeFeatures() default {};
 
     Feature[] parseFeatures() default {};
+    
+    String label() default "";
+    
+    /**
+     * @since 1.2.12
+     */
+    boolean jsonDirect() default false;
 }
