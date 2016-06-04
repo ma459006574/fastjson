@@ -2,13 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
- <!--  
-	<parent>
-	    <groupId>com.alibaba</groupId>
-	   <artifactId>parent-pom</artifactId>
-	   <version>1.0.0-SNAPSHOT</version>
-	 </parent>
--->
+	<!-- <parent> -->
+	<!-- <groupId>com.alibaba</groupId> -->
+	<!-- <artifactId>parent-pom</artifactId> -->
+	<!-- <version>1.0.0-SNAPSHOT</version> -->
+	<!-- </parent> -->
 
 	<groupId>com.alibaba</groupId>
 	<artifactId>fastjson</artifactId>
@@ -26,7 +24,7 @@
 		<gpg.skip>false</gpg.skip>
 		<javadoc.skip>false</javadoc.skip>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jdk.version>1.5</jdk.version>
+		<jdk.version>1.6</jdk.version>
 	</properties>
 
 	<developers>
@@ -47,19 +45,10 @@
 		<connection>scm:git:https://wenshao@github.com/alibaba/fastjson.git</connection>
 	</scm>
 
-<!-- 
-	<distributionManagement>
-		<repository>
-			<id>opensesame</id>
-			<url>dav:http://code.alibabatech.com/mvn/releases/</url>
-		</repository>
-		<snapshotRepository>
-			<id>opensesame</id>
-			<url>dav:http://code.alibabatech.com/mvn/snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
- -->
- 
+	<!-- <distributionManagement> <repository> <id>opensesame</id> <url>dav:http://code.alibabatech.com/mvn/releases/</url> 
+		</repository> <snapshotRepository> <id>opensesame</id> <url>dav:http://code.alibabatech.com/mvn/snapshots/</url> 
+		</snapshotRepository> </distributionManagement> -->
+
 	<organization>
 		<name>Alibaba Group</name>
 		<url>http://code.alibabatech.com/</url>
@@ -92,7 +81,27 @@
 					<encoding>UTF-8</encoding>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
+					<excludes>
+						<exclude>**/odps*/**/*.java</exclude>
+<!-- 						<exclude>**/jdk8/*.java</exclude> -->
+<!-- 						<excludes>**/Jdk8*.java</excludes> -->
+					</excludes>
 				</configuration>
+				<executions>
+					<execution>
+						<id>default-testCompile</id>
+						<phase>test-compile</phase>
+						<configuration>
+							<testExcludes>
+								<exclude>**/odps*/**/*.java</exclude>
+<!-- 								<exclude>**/jdk8/*.java</exclude> -->
+							</testExcludes>
+						</configuration>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
 				<dependencies>
 					<dependency>
 						<groupId>org.codehaus.plexus</groupId>
@@ -123,9 +132,15 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<includes>
-						<include>**/bvt/**/*.java</include>
-					</includes>
+					<!-- <includes> -->
+					<!-- <include>**/bvt/**/*.java</include> -->
+					<!-- </includes> -->
+					<skipTests>true</skipTests>
+					<excludes>
+						<exclude>**/odps/**/*.java</exclude>
+						<exclude>**/odps/*.java</exclude>
+						<exclude>**/odps_udf/*.java</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
 
@@ -191,13 +206,13 @@
 			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>com.aliyun.odps</groupId>
-			<artifactId>odps-sdk-udf</artifactId>
-			<version>0.13.0</version>
-			<scope>provided</scope>
-			<optional>true</optional>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>com.aliyun.odps</groupId> -->
+		<!-- <artifactId>odps-sdk-udf</artifactId> -->
+		<!-- <version>0.15.0</version> -->
+		<!-- <scope>provided</scope> -->
+		<!-- <optional>true</optional> -->
+		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -282,13 +297,13 @@
 		<dependency>
 			<groupId>org.clojure</groupId>
 			<artifactId>clojure</artifactId>
-			<version>1.5.1</version>
+			<version>1.4.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy</artifactId>
-			<version>2.1.5</version>
+			<version>2.1.6</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -304,6 +319,11 @@
 			<version>3.18.0-GA</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>com.aliyun.odps</groupId> -->
+		<!-- <artifactId>odps-sdk-udf</artifactId> -->
+		<!-- <version>0.15.0</version> -->
+		<!-- </dependency> -->
 	</dependencies>
 </project>
 
