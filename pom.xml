@@ -21,8 +21,9 @@
 
 	<properties>
 		<junit.version>4.11</junit.version>
-		<gpg.skip>false</gpg.skip>
-		<javadoc.skip>false</javadoc.skip>
+		<gpg.skip>true</gpg.skip>
+		<javadoc.skip>true</javadoc.skip>
+		<test.skip>true</test.skip>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.6</jdk.version>
 	</properties>
@@ -135,11 +136,9 @@
 					<!-- <includes> -->
 					<!-- <include>**/bvt/**/*.java</include> -->
 					<!-- </includes> -->
-					<skipTests>true</skipTests>
+					<skipTests>${test.skip}</skipTests>
 					<excludes>
-						<exclude>**/odps/**/*.java</exclude>
-						<exclude>**/odps/*.java</exclude>
-						<exclude>**/odps_udf/*.java</exclude>
+						<exclude>**/odps*/**/*.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
@@ -163,6 +162,11 @@
 					<links>
 						<link>http://docs.oracle.com/javase/6/docs/api</link>
 					</links>
+					<excludes>
+						<exclude>
+							<exclude>**/odps*/**/*.java</exclude>
+						</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
 
